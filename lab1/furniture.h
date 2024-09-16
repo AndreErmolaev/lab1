@@ -16,7 +16,7 @@ public:
 	{
 	public:
 		bad_fur(const char* field_name, int field_mean) : bad(field_name, field_mean) { }
-		const char* what() const override { return "Недопустимое значение для числового поля класса Furniture!\n"; }
+		const char* what() const override { return "---- ИСКЛЮЧЕНИЕ! Недопустимое значение для числового поля класса Furniture!\n"; }
 	};
 	Furniture(int h, int w, int d, int c, const char* col, const char* m, const char* t);
 	Furniture();

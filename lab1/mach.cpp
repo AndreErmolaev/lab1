@@ -1,5 +1,5 @@
 #include "machine.h"
-Machine::Machine(long n, int c, const char* mod, const char* mak)
+Machine::Machine(long long n, int c, const char* mod, const char* mak)
 	: number_(n), price_(c)
 {
 	try
@@ -13,7 +13,7 @@ Machine::Machine(long n, int c, const char* mod, const char* mak)
 	}
 	std::strcpy(model_, mod);
 	std::strcpy(make_, mak);
-	std::cout << "Вызван конструктор с параметрами для объекта класса Machine\n";
+	std::cout << "(Конструктор с параметрами для объекта класса Machine)\n";
 }
 Machine::Machine() : number_(1), price_(1)
 {
@@ -29,7 +29,7 @@ Machine::Machine() : number_(1), price_(1)
 	}
 	std::strcpy(model_, "none");
 	std::strcpy(make_, "none");
-	std::cout << "Вызван конструктор без параметров для объекта класса Machine\n";
+	std::cout << "(Конструктор без параметров для объекта класса Machine)\n";
 }
 Machine::Machine(const Machine& cop) : number_(cop.number_), price_(cop.price_)
 {
@@ -44,13 +44,13 @@ Machine::Machine(const Machine& cop) : number_(cop.number_), price_(cop.price_)
 	}
 	std::strcpy(model_, cop.model_);
 	std::strcpy(make_, cop.make_);
-	std::cout << "Вызван конструктор копирования для объектa класса Machine\n";
+	std::cout << "(Конструктор копирования для объектa класса Machine)\n";
 }
 Machine::~Machine()
 {
 	delete[] model_;
 	delete[] make_;
-	std::cout << "Вызван деструктор для объектa класса Machine\n";
+	std::cout << "(Деструктор для объектa класса Machine)\n";
 }
 void Machine::set_model(const char* str)
 {

@@ -7,21 +7,21 @@
 class Base
 {
 public:
-	Base(){ std::cout << "Конструктор класса Base" << std::endl; };
+	Base(){ std::cout << "(Конструктор класса Base)\n"; };
 	virtual void show() const = 0;
 	virtual int compare_money(const Base&) const = 0;
 	virtual int get_money() const = 0;
-	virtual ~Base() { std::cout << "Деструктор класса Base" << std::endl; };
+	virtual ~Base() { std::cout << "(Деструктор класса Base)\n"; };
 };
 class bad : public std::exception
 {
 private:
-	enum { MAX_NAME_FIELD = 7 };
+	enum { MAX_NAME_FIELD = 15 };
 	char field_name_[MAX_NAME_FIELD];
-	int field_mean_;
+	long long field_mean_;
 public:
-	bad(const char* field_name, int field_mean) :field_mean_(field_mean) { std::strcpy(field_name_, field_name); }
-	const char* get_field_name() const { return field_name_; }
-	int get_field_mean() const { return field_mean_; }
+	bad(const char* field_name, long long field_mean) :field_mean_(field_mean) { std::strcpy(field_name_, field_name); }
+	inline const char* get_field_name() const { return field_name_; }
+	inline long long get_field_mean() const { return field_mean_; }
 };
 #endif

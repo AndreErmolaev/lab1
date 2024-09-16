@@ -5,7 +5,7 @@ class Worker:public Base
 {
 private:
 	int salary_;
-	long phone_;
+	long long phone_;
 	char* name_;
 	char* patronymic_;
 	char* surname_;
@@ -15,10 +15,10 @@ public:
 	class bad_work : public bad
 	{
 	public:
-		bad_work(const char* field_name, int field_mean) : bad(field_name, field_mean) { }
-		const char* what() const override { return "Недопустимое значение для числового поля класса Worker!\n"; }
+		bad_work(const char* field_name, long long field_mean) : bad(field_name, field_mean) { }
+		const char* what() const override { return "---- ИСКЛЮЧЕНИЕ! Недопустимое значение для числового поля класса Worker!\n"; }
 	};
-	Worker(int s, long p, const char* n, const char* pat, const char* sur, const char* a, const char* post);
+	Worker(int s, long long p, const char* n, const char* pat, const char* sur, const char* a, const char* post);
 	Worker();
 	Worker(const Worker&);
 	~Worker();
@@ -30,7 +30,7 @@ public:
 	void set_address(const char*);
 	void set_post(const char*);
 	//int get_salary() const;
-	long get_phone() const;
+	long long get_phone() const;
 	const char* get_name() const;
 	const char* get_patr() const;
 	const char* get_surname() const;
@@ -44,7 +44,7 @@ public:
 };
 inline void Worker::set_salary(int i) { if (i <= 0)throw bad_work("salary", i); salary_ = i; }
 inline void Worker::set_phone(long i) { if (i <= 0)throw bad_work("phone", i); phone_ = i; }
-inline long Worker::get_phone() const { return phone_; }
+inline long long Worker::get_phone() const { return phone_; }
 inline const char* Worker::get_name() const { return name_; }
 inline const char* Worker::get_patr() const { return patronymic_; }
 inline const char* Worker::get_surname() const { return surname_; }

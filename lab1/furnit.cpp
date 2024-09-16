@@ -16,7 +16,7 @@ Furniture::Furniture(int h, int w, int d, int c, const char* col, const char* m,
 	std::strcpy(color_, col);
 	std::strcpy(material_, m);
 	std::strcpy(type_fur_, t);
-	std::cout << "Вызван конструктор с параметрами для объекта класса Furniture\n";
+	std::cout << "(Конструктор с параметрами для объекта класса Furniture)\n";
 }
 Furniture::Furniture() :height_(1), width_(1), depth_(1),cost_(1)
 {
@@ -35,7 +35,7 @@ Furniture::Furniture() :height_(1), width_(1), depth_(1),cost_(1)
 	std::strcpy(color_, "none");
 	std::strcpy(material_, "none");
 	std::strcpy(type_fur_, "none");
-	std::cout << "Вызван конструктор без параметров для объекта класса Furniture\n";
+	std::cout << "(Конструктор без параметров для объекта класса Furniture)\n";
 }
 Furniture::Furniture(const Furniture& cop) : height_(cop.height_), width_(cop.width_), depth_(cop.depth_), cost_(cop.cost_)
 {
@@ -53,14 +53,14 @@ Furniture::Furniture(const Furniture& cop) : height_(cop.height_), width_(cop.wi
 	std::strcpy(color_, cop.color_);
 	std::strcpy(material_, cop.material_);
 	std::strcpy(type_fur_, cop.type_fur_);
-	std::cout << "Вызван конструктор копирования для объектa класса Furniture\n";
+	std::cout << "(Конструктор копирования для объектa класса Furniture)\n";
 }
 Furniture::~Furniture()
 {
 	delete[] color_;
 	delete[] material_;
 	delete[] type_fur_;
-	std::cout << "Вызван деструктор для объектa класса Furniture\n";
+	std::cout << "(Деструктор для объектa класса Furniture)\n";
 }
 
 

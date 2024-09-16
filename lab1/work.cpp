@@ -1,5 +1,5 @@
 #include "worker.h"
-Worker::Worker(int s, long p, const char* n, const char* pat, const char* sur, const char* a, const char* post) :
+Worker::Worker(int s, long long p, const char* n, const char* pat, const char* sur, const char* a, const char* post) :
 	salary_(s), phone_(p)
 {
 	try
@@ -20,7 +20,7 @@ Worker::Worker(int s, long p, const char* n, const char* pat, const char* sur, c
 	std::strcpy(surname_, sur);
 	std::strcpy(post_, post);
 	std::strcpy(address_, a);
-	std::cout << "Вызван конструктор с параметрами для объекта класса Worker\n";
+	std::cout << "(Конструктор с параметрами для объекта класса Worker)\n";
 }
 Worker::Worker() :salary_(1), phone_(1)
 {
@@ -43,7 +43,7 @@ Worker::Worker() :salary_(1), phone_(1)
 	std::strcpy(patronymic_, "none");
 	std::strcpy(post_, "none");
 	std::strcpy(address_, "none");
-	std::cout << "Вызван конструктор без параметров для объекта класса Worker\n";
+	std::cout << "(Конструктор без параметров для объекта класса Worker)\n";
 }
 Worker::Worker(const Worker& obj) : salary_(obj.salary_),phone_(obj.phone_)
 {
@@ -65,7 +65,7 @@ Worker::Worker(const Worker& obj) : salary_(obj.salary_),phone_(obj.phone_)
 	std::strcpy(surname_, obj.surname_);
 	std::strcpy(post_, obj.post_);
 	std::strcpy(address_, obj.address_);
-	std::cout << "Вызван конструктор копирования для объектa класса Worker\n";
+	std::cout << "(Конструктор копирования для объектa класса Worker)\n";
 }
 Worker::~Worker()
 {
@@ -74,7 +74,7 @@ Worker::~Worker()
 	delete[] surname_;
 	delete[] post_;
 	delete[] address_;
-	std::cout << "Вызван деструктор для объектa класса Worker\n";
+	std::cout << "(Деструктор для объектa класса Worker)\n";
 }
 void Worker::set_name(const char* str)
 {
