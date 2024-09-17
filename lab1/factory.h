@@ -3,6 +3,7 @@
 #include "furniture.h"
 #include "machine.h"
 #include "worker.h"
+#include <fstream>
 class Factory
 {
 private:
@@ -27,7 +28,7 @@ public:
 		const char* what() const override { return "---- ИСКЛЮЧЕНИЕ! Значение номера выходит за диапазон!"; }
 	};
 	Factory();
-	Factory(const char*, Worker*, Furniture*, Machine*);
+	Factory(const char*);
 	Factory(const Factory&);
 	~Factory();
 	Factory& operator=(const Factory&);
@@ -45,11 +46,17 @@ public:
 	//void show_work() const;
 	//void show_fur() const;
 	//void show_mach() const;
-	void show() const;
+	//void show() const;
+	//friend std::istream& operator>>(std::istream&, Factory**);
+	friend std::ostream& operator<<(std::ostream&, Factory**);
+	friend Factory** scan(std::istream&, Factory**);
 };
 inline const char* Factory::get_name() const { return name; }
 inline int Factory::get_count_workers() const { return count_workers; }
 inline int Factory::get_count_furns() const { return count_furnitures; }
 inline int Factory::get_count_machines() const { return count_machines; }
+std::ostream& operator<<(std::ostream&,Factory**);
+Factory** scan(std::istream&, Factory**);
+//std::istream& operator>>(std::istream&, Factory**);
 //void Factory::show_work() const {};
 #endif

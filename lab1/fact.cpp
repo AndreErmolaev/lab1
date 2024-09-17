@@ -1,5 +1,6 @@
 #include "factory.h"
 #include <iomanip>
+#include <string>
 Factory::Factory()
 {
 	count_furnitures = 0;
@@ -21,21 +22,18 @@ Factory::Factory()
 	std::strcpy(name, "none");
 	std::cout << "(Конструктор без параметров для объекта класса Factory)\n";
 }
-Factory::Factory(const char* n, Worker* work, Furniture* furn, Machine* mach)
+Factory::Factory(const char* n)
 {
-	count_furnitures = 1;
-	count_machines = 1;
-	count_workers = 1;
+	count_furnitures = 0;
+	count_machines = 0;
+	count_workers = 0;
+	fur_mas = nullptr;
+	mach_mas = nullptr;
+	work_mas = nullptr;
 	try
 	{
 		name = new char[std::strlen(n) + 1];
 		std::strcpy(name, n);
-		work_mas = new Worker * [count_workers];
-		work_mas[0] = work;
-		fur_mas = new Furniture * [count_workers];
-		fur_mas[0] = furn;
-		mach_mas = new Machine * [count_workers];
-		mach_mas[0] = mach;
 	}
 	catch (std::bad_alloc)
 	{
@@ -446,6 +444,237 @@ void Factory::set_name(const char* str)
 	std::cout << "--- Имя фабрики установлено\n";
 }
 
+std::ostream& operator<<(std::ostream& out, Factory** fact)
+{
+	for (int i = 0; fact[i] != nullptr; i++)
+	{
+		out << std::setw(60) << "Фабрика " << fact[i]->name << std::endl << std::endl;
+		if (fact[i]->count_workers)
+		{
+			out.fill('-');
+			out << std::setw(155) << "-\n";
+			out.fill(' ');
+			out << std::setw(60) << "РАБОТНИКИ " << std::endl;
+			out.fill('-');
+			out << std::setw(155) << "-\n";
+			out.fill(' ');
+			out << "|  " << std::setw(10) << "Фамилия" << "   ";
+			out << "  " << std::setw(10) << "Имя" << "   ";
+			out << "  " << std::setw(10) << "Отчество" << "   ";
+			out << "  " << std::setw(13) << "Телефон" << "   ";
+			out << "  " << std::setw(40) << "Адрес" << "   ";
+			out << "  " << std::setw(15) << "Пост" << "   ";
+			out << "  " << std::setw(10) << "Зарплата" << "   " << std::endl;
+			out.fill('-');
+			out << std::setw(155) << "-\n";
+			out.fill(' ');
+			for (int j = 0; j < fact[i]->count_workers; j++)
+			{
+				out << j << "  " << std::setw(10) << fact[i]->work_mas[j]->get_surname() << "  |";
+				out << "  " << std::setw(10) << fact[i]->work_mas[j]->get_name() << "  |";
+				out << "  " << std::setw(10) << fact[i]->work_mas[j]->get_patr() << "  |";
+				out << "  " << std::setw(13) << fact[i]->work_mas[j]->get_phone() << "  |";
+				out << "  " << std::setw(40) << fact[i]->work_mas[j]->get_address() << "  |";
+				out << "  " << std::setw(15) << fact[i]->work_mas[j]->get_post() << "  |";
+				out << "  " << std::setw(10) << fact[i]->work_mas[j]->get_money() << "  |" << std::endl;
+			}
+		}
+		if (fact[i]->count_furnitures)
+		{
+			out.fill('_');
+			out << std::setw(155) << "_\n";
+			out.fill(' ');
+			out << std::setw(60) << "МЕБЕЛЬ " << std::endl;
+			out.fill('-');
+			out << std::setw(155) << "-\n";
+			out.fill(' ');
+			out << "|  " << std::setw(20) << "Тип" << "   ";
+			out << "  " << std::setw(20) << "Материал" << "   ";
+			out << "  " << std::setw(20) << "Цвет" << "   ";
+			out << "  " << std::setw(6) << "Высота" << "   ";
+			out << "  " << std::setw(6) << "Ширина" << "   ";
+			out << "  " << std::setw(6) << "Глубина" << "   ";
+			out << "  " << std::setw(11) << "Стоимость" << "   " << std::endl;
+			out.fill('-');
+			out << std::setw(155) << "-\n";
+			out.fill(' ');
+			for (int j = 0; j < fact[i]->count_furnitures; j++)
+			{
+				out << j << "  " << std::setw(20) << fact[i]->fur_mas[j]->get_type() << "  |";
+				out << "  " << std::setw(20) << fact[i]->fur_mas[j]->get_material() << "  |";
+				out << "  " << std::setw(20) << fact[i]->fur_mas[j]->get_color() << "  |";
+				out << "  " << std::setw(6) << fact[i]->fur_mas[j]->get_height() << "  |";
+				out << "  " << std::setw(6) << fact[i]->fur_mas[j]->get_width() << "  |";
+				out << "  " << std::setw(6) << fact[i]->fur_mas[j]->get_depth() << "  |";
+				out << "  " << std::setw(11) << fact[i]->fur_mas[j]->get_money() << "  |" << std::endl;
+			}
+		}
+		if (fact[i]->count_machines)
+		{
+			out.fill('_');
+			out << std::setw(155) << "_\n";
+			out.fill(' ');
+			out << std::setw(60) << "МАШИНЫ " << std::endl;
+			out.fill('-');
+			out << std::setw(155) << "-\n";
+			out.fill(' ');
+			out << "|  " << std::setw(20) << "Марка" << "   ";
+			out << "  " << std::setw(20) << "Модель" << "   ";
+			out << "  " << std::setw(20) << "Номер" << "   ";
+			out << "  " << std::setw(6) << "Цена" << "   " << std::endl;
+			out.fill('-');
+			out << std::setw(155) << "-\n";
+			out.fill(' ');
+			for (int j = 0; j < fact[i]->count_machines; j++)
+			{
+				out << j << "  " << std::setw(20) << fact[i]->mach_mas[j]->get_make() << "  |";
+				out << "  " << std::setw(20) << fact[i]->mach_mas[j]->get_model() << "  |";
+				out << "  " << std::setw(20) << fact[i]->mach_mas[j]->get_number() << "  |";
+				out << "  " << std::setw(6) << fact[i]->mach_mas[j]->get_money() << "  |" << std::endl;
+			}
+			out.fill('_');
+			out << std::setw(155) << "_______\n\n\n";
+			out.fill(' ');
+		}
+	}
+	return out;
+}
+bool bad_stroki(std::istream& in, std::string& str)
+{
+	std::getline(in, str);
+	if (str[0] == '|')
+		std::getline(in, str);
+	for (int j = 6; j < str.size(); j++)
+	{
+		if (str[j - 6] == '_' && str[j - 5] == '_' && str[j - 4] == '_' && str[j - 3] == '_' && str[j - 2] == '_' && str[j - 1] == '_')
+			return false;
+		else if (str[j - 6] == '-' && str[j - 5] == '-' && str[j - 4] == '-')
+		{
+			std::getline(in, str);
+			if (str[0] == '|')
+			{
+				std::getline(in, str);
+				std::getline(in, str);
+			}
+			break;
+		}
+	}
+	return true;
+}
+void razdel(char* mas[], char* st)
+{
+	int i = 0;
+	char* next_tok = NULL;
+	char* prov = strtok_s(st, " |", &next_tok);
+	while (prov != NULL)
+	{
+		prov = strtok_s(NULL, " |", &next_tok);
+		mas[i++] = prov;
+	}
+}
+Factory** scan(std::istream& in, Factory** fact)
+{
+	using std::string;
+	if(fact!=nullptr)
+	{
+		for (int i = 0; fact[i] != nullptr; i++)
+			delete[] fact[i];
+		delete[] fact;
+		fact = nullptr;
+	}
+	string str;
+	int count_factory = 0;
+	while(in)
+	{
+		std::getline(in,str);
+		for (int j = 6; j < str.size(); j++)
+		{
+			if (str[j - 6] == 'Ф' && str[j - 5] == 'а' && str[j - 4] == 'б' && str[j - 3] == 'р' && str[j - 2] == 'и' && str[j - 1] == 'к' && str[j] == 'а')
+			{
+				count_factory += 1;
+				char* next_tok = NULL;
+				char* st = new char[strlen(str.c_str())+1];
+				strcpy(st,str.c_str());
+				char* prov = strtok_s(st, " ", &next_tok);
+				prov = strtok_s(NULL, " ", &next_tok);
+				delete[] st;
+			}
+		}
+	}
+	fact = new Factory * [count_factory+1];
+	fact[count_factory] = nullptr;
+	count_factory = -1;
+	in.clear();
+	in.seekg(std::ios_base::beg);
+	while (in)
+	{
+		std::getline(in, str);
+		for (int j = 6; j < str.size(); j++)
+		{
+			if (str[j - 6] == 'Ф' && str[j - 5] == 'а' && str[j - 4] == 'б' && str[j - 3] == 'р' && str[j - 2] == 'и' && str[j - 1] == 'к' && str[j] == 'а')
+			{
+				char* next_tok = NULL;
+				char* st = new char[strlen(str.c_str()) + 1];
+				strcpy(st, str.c_str());
+				char* prov = strtok_s(st, " ", &next_tok);
+				prov = strtok_s(NULL, " ", &next_tok);
+				Factory* f = new Factory(prov);
+				//f->set_name(prov);
+				count_factory += 1;
+				fact[count_factory] = f;
+				delete[] st;
+			}
+			else if (str[j - 6] == 'Р' && str[j - 5] == 'А' && str[j - 4] == 'Б' && str[j - 3] == 'О' && str[j - 2] == 'Т' && str[j - 1] == 'Н' && str[j] == 'И')
+			{
+				while (in)
+				{
+					if (!bad_stroki(in, str))
+						goto NEXT;
+					char* mas[10];
+					char* st = new char[strlen(str.c_str()) + 1];
+					strcpy(st, str.c_str());
+					razdel(mas, st);
+					Worker w(atoi(mas[6]), atoll(mas[3]), mas[1], mas[2], mas[0], mas[4], mas[5]);
+					fact[count_factory]->add_Worker(w);
+					delete[] st;
+				}
+			}
+			else if (str[j - 6] == 'М' && str[j - 5] == 'Е' && str[j - 4] == 'Б' && str[j - 3] == 'Е' && str[j - 2] == 'Л' && str[j - 1] == 'Ь')
+			{
+				while (in)
+				{
+					if (!bad_stroki(in, str))
+						goto NEXT;
+					char* mas[10];
+					char* st = new char[strlen(str.c_str()) + 1];
+					strcpy(st, str.c_str());
+					razdel(mas, st);
+					Furniture f(atoi(mas[3]), atoi(mas[4]), atoi(mas[5]), atoi(mas[6]), mas[2],mas[1],mas[0]);
+					fact[count_factory]->add_Furniture(f);
+					delete[] st;
+				}
+			}
+			else if (str[j - 6] == 'М' && str[j - 5] == 'А' && str[j - 4] == 'Ш' && str[j - 3] == 'И' && str[j - 2] == 'Н' && str[j - 1] == 'Ы')
+			{
+				while (in)
+				{
+					if (!bad_stroki(in, str))
+						goto NEXT;
+					char* mas[10];
+					char* st = new char[strlen(str.c_str()) + 1];
+					strcpy(st, str.c_str());
+					razdel(mas,st);
+					Machine m(atoll(mas[2]),atoi(mas[3]),mas[1],mas[0]);
+					fact[count_factory]->add_Machine(m);
+					delete[] st;
+				}
+			}
+		}
+		NEXT:;
+	}
+	return fact;
+}
+/*
 void Factory::show() const
 {
 	std::cout << "------------------------------------------------------------- Фабрика " << name << " -------------------------------------------------------------------\n";
@@ -511,3 +740,30 @@ void Factory::show() const
 	}
 	std::cout << "\n-----------------------------------------------------------------------------------------------------------------------------------------------\n";
 }
+*/
+
+/*
+Factory::Factory(const char* n, Worker* work, Furniture* furn, Machine* mach)
+{
+	count_furnitures = 1;
+	count_machines = 1;
+	count_workers = 1;
+	try
+	{
+		name = new char[std::strlen(n) + 1];
+		std::strcpy(name, n);
+		work_mas = new Worker * [count_workers];
+		work_mas[0] = work;
+		fur_mas = new Furniture * [count_workers];
+		fur_mas[0] = furn;
+		mach_mas = new Machine * [count_workers];
+		mach_mas[0] = mach;
+	}
+	catch (std::bad_alloc)
+	{
+		std::cout << "Недостаточно памяти!\n";
+		exit(EXIT_FAILURE);
+	}
+	std::cout << "(Конструктор с параметрами для объекта класса Factory)\n";
+}
+*/
