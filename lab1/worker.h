@@ -29,7 +29,6 @@ public:
 	void set_surname(const char*);
 	void set_address(const char*);
 	void set_post(const char*);
-	//int get_salary() const;
 	long long get_phone() const;
 	const char* get_name() const;
 	const char* get_patr() const;
@@ -37,9 +36,10 @@ public:
 	const char* get_address() const;
 	const char* get_post() const;
 	Worker& operator=(const Worker&);
+	bool operator==(const Worker&) const;     //Для сравнения зарплат
+	bool operator>(const Worker&) const;	  //Для сравнения зарплат
 public:
 	void show() const override;
-	int compare_money(const Base&) const override;
 	int get_money() const override;
 };
 inline void Worker::set_salary(int i) { if (i <= 0)throw bad_work("salary", i); salary_ = i; }

@@ -117,13 +117,4 @@ void Machine::show() const
 	std::cout << "Гос.номер: " << number_ << std::endl;
 	std::cout << "Стоимость: " << price_ << std::endl;
 }
-int Machine::compare_money(const Base& obj) const
-{
-	if (price_ == obj.get_money())
-		return 0;
-	else if (price_ > obj.get_money())
-		return 1;
-	else
-		return 2;
-}
 int Machine::get_money() const { return price_; }

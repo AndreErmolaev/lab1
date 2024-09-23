@@ -40,7 +40,6 @@ public:
 	const char* get_type() const;
 public:
 	void show() const override;
-	int compare_money(const Base&) const override;
 	int get_money() const override;
 };
 inline void Furniture::set_height(int i) { if (i <= 0)throw bad_fur("height",i); height_ = i; }

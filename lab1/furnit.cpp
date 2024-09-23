@@ -62,9 +62,6 @@ Furniture::~Furniture()
 	delete[] type_fur_;
 	std::cout << "(Деструктор для объектa класса Furniture)\n";
 }
-
-
-
 bool Furniture::operator>(const Furniture& obj) const 
 {
 	return (width_ * height_ * depth_ > obj.width_ * obj.height_ * obj.depth_) ? true : false;
@@ -156,14 +153,4 @@ void Furniture::show() const
 	std::cout << "Материал: " << material_ << std::endl;
 	std::cout << "Стоимость: " << cost_ << std::endl;
 }
-int Furniture::compare_money(const Base& obj) const
-{
-	if (cost_ == obj.get_money())
-		return 0;
-	else if (cost_ > obj.get_money())
-		return 1;
-	else
-		return 2;
-}
 int Furniture::get_money() const { return cost_; }
-//virtual void set_money(int);

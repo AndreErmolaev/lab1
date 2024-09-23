@@ -31,7 +31,6 @@ public:
 	bool operator>(const Machine&) const;	  //Для сравнения номеров
 public:
 	void show() const override;
-	int compare_money(const Base&) const override;
 	int get_money() const override;
 };
 inline void Machine::set_number(long long i) { if (i <= 0)throw bad_mach("number", i); number_ = i; }

@@ -194,13 +194,12 @@ void Worker::show() const
 	std::cout << "Должность: " << post_ << std::endl;
 	std::cout << "Зарплата: " << salary_ << std::endl;
 }
-int Worker::compare_money(const Base& obj) const
+bool Worker::operator==(const Worker& obj) const
 {
-	if (salary_ == obj.get_money())
-		return 0;
-	else if (salary_ > obj.get_money())
-		return 1;
-	else
-		return 2;
+	return salary_ == obj.salary_ ? true : false;
+}
+bool Worker::operator>(const Worker& obj) const
+{
+	return salary_ > obj.salary_ ? true : false;
 }
 int Worker::get_money() const { return salary_; }

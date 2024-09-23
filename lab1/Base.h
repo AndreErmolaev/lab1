@@ -9,7 +9,6 @@ class Base
 public:
 	Base(){ std::cout << "(Конструктор класса Base)\n"; };
 	virtual void show() const = 0;
-	virtual int compare_money(const Base&) const = 0;
 	virtual int get_money() const = 0;
 	virtual ~Base() { std::cout << "(Деструктор класса Base)\n"; };
 };
